@@ -22,3 +22,4 @@ def minOperations(n):
         current_num_of_h += copied
         num_of_operations += 1
     return num_of_operations
+
