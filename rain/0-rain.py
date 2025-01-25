@@ -1,22 +1,29 @@
 #!/usr/bin/python3
 """
-Module Name: Your Script Name
-Description: Explain the purpose of the script.
+0-rain module: contains a function to solve the rainwater trapping problem.
 """
 
-def your_function(data):
+def rain(walls):
     """
-    Function Description: Add a brief explanation of what this function does.
+    Calculate how much water will be retained after raining.
     """
-    # Your implementation here
-    result = []  # Replace this with actual logic
-    return result
+    if not walls or len(walls) < 3:
+        return 0
 
-if __name__ == "__main__":
-    test_cases = [
-        [], [2, 0, 2], [0, 1, 0, 2, 0, 3, 0, 4],
-        [1, 1, 2, 0, 1, 1, 1], [0, 2, 1, 0, 1, 3, 1, 2, 1, 1, 2, 1],
-        [2, 0, 0, 0, 0, 3, 0], [1], [3, 3]
-    ]
-    for case in test_cases:
-        print(your_function(case))
+    n = len(walls)
+    left = [0] * n
+    right = [0] * n
+
+    left[0] = walls[0]
+    for i in range(1, n):
+        left[i] = max(left[i - 1], walls[i])
+
+    right[n - 1] = walls[n - 1]
+    for i in range(n - 2, -1, -1):
+        right[i] = max(right[i + 1], walls[i])
+
+    water = 0
+    for i in range(n):
+        water += min(left[i], right[i]) - walls[i]
+
+    return water
