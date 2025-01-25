@@ -7,19 +7,21 @@ exactly n H characters in the file.
 
 
 def minOperations(n):
-    if n < 2:
+    if n <= 1:
         return 0
-
-    current_num_of_h = 1
-    copied = 0
-    num_of_operations = 0
-
-    while current_num_of_h < n:
-        if n % current_num_of_h == 0:
-            copied = current_num_of_h
-            num_of_operations += 1
-
-        current_num_of_h += copied
-        num_of_operations += 1
-    return num_of_operations
-
+    
+    operations = 0
+    divisor = 2  # Start from the smallest possible divisor
+    
+    # Try to factor n with all possible divisors
+    while divisor * divisor <= n:
+        while n % divisor == 0:
+            operations += divisor  # Add the divisor to the operations
+            n //= divisor  # Reduce n by the divisor
+        divisor += 1
+    
+    # If n is greater than 1, it means n itself is a prime factor
+    if n > 1:
+    operations += n
+    return operations
+   
