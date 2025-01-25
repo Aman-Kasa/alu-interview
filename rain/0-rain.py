@@ -3,6 +3,7 @@
 0-rain module: contains a function to solve the rainwater trapping problem.
 """
 
+
 def rain(walls):
     """
     Calculate how much water will be retained after raining.
